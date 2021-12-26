@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+
+<head th:replace="common/header :: common-header"></head>
+
+
+<body>
+
+  <div th:replace="common/header :: navbar"></div>
+
+
+  <div class="login-regis">
+
+    <div class="form-login" th:classappend="${classActiveLogin} ? 'in active' ">
+      <h1>LOGIN</h1>
+      <form action="">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+
+        <label for="mail">Password:</label>
+        <input type="password" id="password" name="password">
+
+        <button type="submit" name="login">Login</button>
+      </form>
+
+
+    </div>
+
+    <div class="vl"></div>
+
+
+     <div class="form-regis" th:classappend="${classActiveNewUserr} ? 'in active'">
+         <h1>REGISTRATION</h1>
+       <form action="">
+         <label for="username">Username:</label>
+         <input type="text" id="username" name="username">
+         
+         <label for="email">E-mail:</label>
+         <input type="text" id="email" name="email">
+
+         <label for="mail">Full name:</label>
+         <input type="text" id="full-name" name="full-name">
+
+         <label for="mail">Password:</label>
+         <input type="password" id="password" name="password">
+
+         <label for="mail">Confirm Password:</label>
+         <input type="password" id="password" name="password">
+
+         <button type="submit" name="register">Register</button>
+       </form>
+
+
+    </div>
+  </div>
+
+
+
+  <div th:replace="common/header :: body-bottom"></div>
+
+
+
+</body>
+
+
+</html>
