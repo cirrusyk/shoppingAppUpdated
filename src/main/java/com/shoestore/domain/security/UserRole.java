@@ -11,16 +11,14 @@ import javax.persistence.Table;
 
 import com.shoestore.domain.User;
 
+
 @Entity
 @Table(name="user_role")
-
 public class UserRole {
-	
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long userRoleId;
-	
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="user_id")
@@ -29,14 +27,13 @@ public class UserRole {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="role_id")
 	private Role role;
-
 	
+	public UserRole(){}
 	
 	public UserRole(User user, Role role) {
-		this.user = user; 
-		this.role=role;
+		this.user = user;
+		this.role = role;
 	}
-
 
 
 	public Long getUserRoleId() {
@@ -44,11 +41,9 @@ public class UserRole {
 	}
 
 
-
 	public void setUserRoleId(Long userRoleId) {
 		this.userRoleId = userRoleId;
 	}
-
 
 
 	public User getUser() {
@@ -56,11 +51,9 @@ public class UserRole {
 	}
 
 
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 
 
 	public Role getRole() {
@@ -68,12 +61,9 @@ public class UserRole {
 	}
 
 
-
 	public void setRole(Role role) {
 		this.role = role;
 	}
 	
 	
-	
-
 }

@@ -7,24 +7,27 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.shoestore.domain.User;
+
 import com.shoestore.repository.UserRepository;
 
 @Service
 public class UserSecurityService implements UserDetailsService {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserRepository repository;
 	
 	@Override
 	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
 		
-		User user = userRepository.findByUsername(username);
+		User user = repository.findByUsername(username);
 		if(null== user) {
-			throw new UsernameNotFoundException("Username not found");
+			throw new UsernameNotFoundException("User not found");
 			
 		}
-		 return user;
+		 return new CustomUserDetails(user);
 	}
+
+	
 
 }

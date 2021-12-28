@@ -12,14 +12,16 @@
 
   <div class="login-regis">
 
-    <div class="form-login" th:classappend="${classActiveLogin} ? 'in active' ">
+    <div class="form-login"  >
       <h1>LOGIN</h1>
-      <form action="">
+      <div class="bg-danger" th:if="${param.error}">Invalid username
+					and password.</div>
+      <form th:action="@{/login}" method="post"  >
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
+        <input type="text" id="username" name="username" required>
 
         <label for="mail">Password:</label>
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" name="password" required>
 
         <button type="submit" name="login">Login</button>
       </form>
@@ -30,23 +32,22 @@
     <div class="vl"></div>
 
 
-     <div class="form-regis" th:classappend="${classActiveNewUserr} ? 'in active'">
+     <div class="form-regis">
          <h1>REGISTRATION</h1>
-       <form action="">
+       <form th:action="@{/process_register}" method="post" th:object="${user}" >
          <label for="username">Username:</label>
-         <input type="text" id="username" name="username">
+         <input type="text" id="username" name="username" th:field="*{username}" value="" required>
          
          <label for="email">E-mail:</label>
-         <input type="text" id="email" name="email">
+         <input type="text" id="email" name="email" th:field="*{email}" required value="">
 
          <label for="mail">Full name:</label>
-         <input type="text" id="full-name" name="full-name">
+         <input type="text" id="full-name" name="full-name" th:field="*{fullName}" value="" required>
 
          <label for="mail">Password:</label>
-         <input type="password" id="password" name="password">
+         <input type="password" id="password" name="password" th:field="*{password}" value="" required>
 
-         <label for="mail">Confirm Password:</label>
-         <input type="password" id="password" name="password">
+        
 
          <button type="submit" name="register">Register</button>
        </form>

@@ -20,6 +20,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shoestore.domain.security.UserRole;
 import com.shoestore.domain.security.Authority;
 
+
+
 @Entity
 public class User implements UserDetails {
 	
@@ -30,11 +32,14 @@ public class User implements UserDetails {
 	private String username;
 	private String fullName;
 	
+	
 	@Column(name="email", nullable=false, updatable=false)
 	private String email;
 	private String password;
-	private String confirm_password;
-	private boolean enabled= true;
+
+	private Boolean enabled= true;
+
+
 	
 
 	@OneToMany(mappedBy = "user", cascade= CascadeType.ALL, fetch = FetchType.EAGER)
@@ -54,30 +59,17 @@ public class User implements UserDetails {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getFullName() {
-		return fullName;
-	}
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	
+	
+	
+	
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getConfirm_password() {
-		return confirm_password;
-	}
-	public void setConfirm_password(String confirm_password) {
-		this.confirm_password = confirm_password;
-	}
+	
 	
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
@@ -95,6 +87,30 @@ public class User implements UserDetails {
 		
 		return authorities;
 		
+	}
+	
+	
+	
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+	public String getFullName() {
+		return fullName;
+	}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 	@Override
 	public boolean isAccountNonExpired() {

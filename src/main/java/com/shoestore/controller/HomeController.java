@@ -1,19 +1,51 @@
 package com.shoestore.controller;
 
 
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.shoestore.domain.User;
+import com.shoestore.repository.UserRepository;
+
 
 
 @Controller
 public class HomeController {
+	@Autowired
+	private UserRepository repository;
+	
+	@GetMapping("/login")
+	public String showRegistrationForm(Model model) {
+	    model.addAttribute("user", new User());
+	     
+	    return "login";
+	}
+	
+	
+	
+	@PostMapping ("/process_register")
+	 public String processingUserRegistration(User user,  RedirectAttributes redirAttrs) {
+		
+		   
+		 repository.save(user);
+		 redirAttrs.addFlashAttribute("You have registered successfully");
+		 return "profile";
+	 }
+	
 	
 	
 	@RequestMapping("/")
 	public String index() {
 		return "index";
 	}
+	
+	
 	
 	@RequestMapping("/newReleases")
 	public String newReleases() {
@@ -32,10 +64,6 @@ public class HomeController {
 		return "contact";
 	}
 	
-	@RequestMapping("/profile")
-	public String profile() {
-		return "profile";
-	}
 	
 	@RequestMapping("/trackOrdersUser")
 	public String trackOrdersUser() {
@@ -99,19 +127,18 @@ public class HomeController {
 		return "basketBallShoes";
 	}
 	
-	
-	
-	@RequestMapping("/login")
-	public String login(Model model) {
-		model.addAttribute("classActiveLogin", true);
-		return "loginRegistration";
+	@RequestMapping("/profile")
+	public String profile() {
+		return "profile";
 	}
 	
-	@RequestMapping("/newUser")
-	public String newUser(Model model) {
-		model.addAttribute("classActiveNewUser", true);
-		return "loginRegistration";
-	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
