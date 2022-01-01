@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
+
 import com.shoestore.service.impl.UserSecurityService;
 import com.shoestore.utility.SecurityUtility;
 
@@ -29,28 +30,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	
 	
-	@Bean
-	public UserDetailsService userDetailsService() {
-		return new UserSecurityService();
-	}
 	
-	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authProvider =  new DaoAuthenticationProvider();
-		authProvider.setUserDetailsService(userDetailsService());
-		return authProvider;
-		
-		
-	}
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(authenticationProvider());
-	}
+	@Autowired
+	private UserSecurityService userSecurityService;
+
+	private BCryptPasswordEncoder passwordEncoder() {
+		return SecurityUtility.passwordEncoder();
 
 	
 	
-	
+	}
 	
 	
 	private static final String [] PUBLIC_MATCHERS= {
@@ -90,6 +80,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.rememberMe();
 				
 		
+	}
+	
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+		auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
+
 	}
 	
 	

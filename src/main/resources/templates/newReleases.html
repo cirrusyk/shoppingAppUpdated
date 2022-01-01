@@ -10,135 +10,56 @@
   <div th:replace="common/header :: navbar"></div>
 
   <div class="main">
-    <h1 class="title-section"><a href="#new">NEW ARRIVALS</a></h1>
+  
+  <div class="top">
+  <h1 class="title-section"><a href="#new">NEW ARRIVALS</a></h1>
+    
+  </div>
+    
 
     <div class="row-first">
-      <div class="row-section">
-        <div class="column first">
-          <div class="image-product">
-            <img src="image/nike-air-zoom-sup.png" style="width:85%">
+      <div class="row-section" style="flex-wrap: wrap">
+      
+      
+      
+      
+      
+        <div class="column" data-th-each="shoes : ${shoesList}">
+        <div th:if="${shoes != null}">
+        <div class="image-product">
+            <a th:href="@{/productPage?id=}+${shoes.id}" ><img th:src="#{adminPath}+@{/image/shoes/} + ${shoes.id} + '.png'" style="width:100%"></a> 
           </div>
           <div class="info">
-            <h2 href="#" class="title-product">NIKE AIR ZOOM SUPERREP</h2>
-            <h2 href="#" class="price-product">989,00DHS</h2>
+             <a th:href="@{/productPage?id=}+${shoes.id}" ><h2 th:text="${#strings.toUpperCase(shoes.name)}" class="title-product"> </h2></a>
+          
+             <a th:href="@{/productPage?id=}+${shoes.id}" ><h2 th:text="${#numbers.formatDecimal(shoes.price, 0, 2, 'POINT')} + DHS" class="price-product"></h2></a> 
+          
+            
+           
           </div>
+        
+        </div>
+          
         </div>
 
-        <div class="column">
-          <div class="image-product">
-            <img href="#" src="image/nike-free-metcon.png" style="width:85%">
-          </div>
-
-          <div class="info">
-            <h2 href="#" class="title-product">NIKE FREE METCON</h2>
-            <h2 href="#" class="price-product">912,00DHS</h2>
-          </div>
-
-        </div>
-        <div class="column last">
-          <div class="image-product">
-            <img class="product-bg" href="#" src="image/nike-air-zoom-pegasus.png" style="width:85%">
-          </div>
-
-          <div class="info">
-            <h2 href="#" class="title-product">NIKE AIR ZOOM 31</h2>
-            <h2 href="#" class="price-product">912,00DHS</h2>
-          </div>
-
-        </div>
+      
       </div>
     </div>
 
-    <div class="row">
-      <div class="row-section">
-        <div class="column first">
-          <div class="image-product">
-            <img class="product-bg" href="#" src="image/adidas-ultraboost.png" style="width:85%">
-          </div>
-
-          <div class="info">
-            <h2 href="#" class="title-product">ADIDAS ULTRABOOST 22</h2>
-            <h2 href="#" class="price-product">1650,00DHS</h2>
-          </div>
-
-        </div>
-        <div class="column">
-          <div class="image-product">
-            <img href="#" class="product-bg" src="image/bondi-7-wide.png" style="width:85%">
-          </div>
-
-          <div class="info">
-            <h2 href="#" class="title-product">BONDI 7 WIDE</h2>
-            <h2 href="#" class="price-product">16750,00DHS</h2>
-          </div>
-
-        </div>
-        <div class="column last">
-          <div class="image-product">
-            <img class="product-bg" href="#" src="image/mizuno-wave-rider.png" style="width:85%">
-          </div>
-
-          <div class="info">
-            <h2 href="#" class="title-product">MIZUNO WAVE RIDER</h2>
-            <h2 href="#" class="price-product">1200,00DHS</h2>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
+    
 
 
-
-    <div class="row">
-      <div class="row-section">
-        <div class="column first">
-          <div class="image-product">
-            <img class="product-bg" href="#" src="image/nike-air-zoom-pegasu-31s.png" style="width:85%">
-          </div>
-
-          <div class="info">
-            <h2 href="#" class="title-product">NIKE AIR ZOOM 38</h2>
-            <h2 href="#" class="price-product">912,00DHS</h2>
-          </div>
-
-        </div>
-        <div class="column">
-          <div class="image-product">
-            <img class="product-bg" href="#" src="image/new-balance-fresh.png" style="width:85%">
-          </div>
-
-          <div class="info">
-            <h2 href="#" class="title-product">NEW BALANCE FRESH</h2>
-            <h2 href="#" class="price-product">1300,00DHS</h2>
-          </div>
-
-        </div>
-        <div class="column last">
-          <div href="#" class="image-product">
-            <img class="product-bg" href="#" src="image/mizuno-wave-rider-25.png" style="width:85%">
-          </div>
-
-          <div class="info">
-            <h2 href="#" class="title-product">MIZUNO WAVE RIDER 25</h2>
-            <h2 href="#" class="price-product">1350,50DHS</h2>
-          </div>
-
-        </div>
 
 
       </div>
-    </div>
 
-    <div class="pages">
-    <a class="prev-page">&#10094;</a>
-    <a class="page active" href="#">1</a>
-    <a class="page" href="#">2</a>
-    <a class="page" href="#">3</a>
-    <a class="next-page">&#10095;</a>
-    </div>
 
-  </div>
+
+    <div class="pages" id="pagination">
+    
+    
+    </div>
+  
 
 
 
@@ -154,6 +75,33 @@
 
   <div th:replace="common/header :: body-bottom"></div>
 
+
+	<script>
+  
+
+  $(function () {
+      window.pagObj = $('#pagination').twbsPagination({
+          totalPages: 35,
+          visiblePages: 3,
+          first: false,
+          last: false,
+          prev:"&#10094;",
+          next: "&#10095;",
+          prevClass: "previous",
+          nextClass:"nextpage",
+     
+          
+          onPageClick: function (event, page) {
+              console.info(page + ' (from options)');
+          }
+      }).on('page', function (event, page) {
+          console.info(page + ' (from event listening)');
+      });
+  });
+  
+ 
+  
+  </script>
 
 
 </body>

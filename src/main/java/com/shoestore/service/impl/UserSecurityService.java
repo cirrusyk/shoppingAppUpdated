@@ -14,18 +14,18 @@ import com.shoestore.repository.UserRepository;
 public class UserSecurityService implements UserDetailsService {
 	
 	@Autowired
-	private UserRepository repository;
+	private UserRepository userRepository;
 	
 	@Override
 	
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
 		
-		User user = repository.findByUsername(username);
+		User user = userRepository.findByUsername(username);
 		if(null== user) {
 			throw new UsernameNotFoundException("User not found");
 			
 		}
-		 return new CustomUserDetails(user);
+		 return user;
 	}
 
 	

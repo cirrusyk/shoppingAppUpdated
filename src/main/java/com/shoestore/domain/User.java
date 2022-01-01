@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,22 +24,26 @@ import com.shoestore.domain.security.Authority;
 
 
 @Entity
+@Table(name = "user")
 public class User implements UserDetails {
-	
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	@Column(name="id", nullable=false, updatable=false)
-	private Long id;
-	private String username;
-	private String fullName;
-	
-	
-	@Column(name="email", nullable=false, updatable=false)
-	private String email;
-	private String password;
+    
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long id;
 
-	private Boolean enabled= true;
+    @Column(name = "first_name", nullable = false, length = 20)
+    private String username;
 
+    @Column(name = "last_name", nullable = false, length = 20)
+    private String fullName;
+    
+    @Column(name="email", nullable=false, length = 20)
+    private String email;
+
+    @Column(nullable = false, length = 64)
+    private String password;
+
+    private Boolean enabled= true;
 
 	
 

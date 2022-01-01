@@ -1,11 +1,13 @@
 package com.shoestore.service.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.shoestore.domain.User;
 import com.shoestore.domain.security.UserRole;
@@ -46,6 +48,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User save(User user) {
 		return userRepository.save(user);
+	}
+	
+	public List<User> findAll() {
+		return (List<User>)userRepository.findAll();
+	}
+
+	@Override
+	public User findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
